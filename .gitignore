@@ -1,0 +1,12 @@
+# Dados temporarios e sensiveis
+*.json
+*.bak
+*.dmp
+*.log
+*.tmp
+
+# IDEs e Sistema Operacional
+.vscode/
+.idea/
+Thumbs.db
+Desktop.ini
