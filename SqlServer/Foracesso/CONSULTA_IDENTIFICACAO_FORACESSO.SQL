@@ -99,26 +99,7 @@ ORDER BY PES.PESS_NOME;
 
 
 -- =============================================================================
--- 5. AUDITORIA DE SEGURANÇA: IDENTIFICAÇÕES VÁLIDAS EM PESSOAS INATIVAS
---    Detecta crachás ativos associados a matrículas inativas/demitidas (risco de acesso indevido).
--- =============================================================================
-SELECT
-    MAT.MATR_MATRICULA       AS "MATRICULA",
-    PES.PESS_NOME            AS "NOME",
-    IDM.IDTF_CODIGO          AS "IDENTIFICACAO",
-    IDM.IDMT_VALIDADE        AS "VALIDADE"
-FROM MATRICULADO MAT
-INNER JOIN PESSOA PES ON 
-    MAT.PESS_ID = PES.PESS_ID
-INNER JOIN IDENTIFICACAO_MATRICULADO IDM ON 
-    MAT.MATR_ID = IDM.MATR_ID
-WHERE MAT.MATR_ATIVO = 0
-  AND (IDM.IDMT_VALIDADE IS NULL OR IDM.IDMT_VALIDADE > GETDATE())
-ORDER BY PES.PESS_NOME;
-
-
--- =============================================================================
--- 6. AUDITORIA: IDENTIFICAÇÕES DUPLICADAS (MESMO CÓDIGO VINCULADO A > 1 MATRÍCULA)
+-- 5. AUDITORIA: IDENTIFICAÇÕES DUPLICADAS (MESMO CÓDIGO VINCULADO A > 1 MATRÍCULA)
 --    Gera conflito nas catracas e falha de identificação de evento.
 -- =============================================================================
 SELECT
@@ -132,28 +113,8 @@ WHERE (IDM.IDMT_VALIDADE IS NULL OR IDM.IDMT_VALIDADE > GETDATE())
 GROUP BY IDM.IDTF_CODIGO
 HAVING COUNT(DISTINCT MAT.MATR_ID) > 1;
 
-
 -- =============================================================================
--- 7. IDENTIFICAÇÕES EXPIRADAS / VENCIDAS (HISTÓRICO)
---    Lista credenciais cujo prazo já encerrou.
--- =============================================================================
-SELECT
-    MAT.MATR_MATRICULA       AS "MATRICULA",
-    PES.PESS_NOME            AS "NOME",
-    IDM.IDTF_CODIGO          AS "IDENTIFICACAO",
-    IDM.IDMT_VALIDADE        AS "DATA_VENCIMENTO"
-FROM MATRICULADO MAT
-INNER JOIN PESSOA PES ON 
-    MAT.PESS_ID = PES.PESS_ID
-INNER JOIN IDENTIFICACAO_MATRICULADO IDM ON 
-    MAT.MATR_ID = IDM.MATR_ID
-WHERE IDM.IDMT_VALIDADE IS NOT NULL 
-  AND IDM.IDMT_VALIDADE <= GETDATE()
-ORDER BY IDM.IDMT_VALIDADE DESC;
-
-
--- =============================================================================
--- 8. MATRICULADOS COM MÚLTIPLAS IDENTIFICAÇÕES ATIVAS
+-- 6. MATRICULADOS COM MÚLTIPLAS IDENTIFICAÇÕES ATIVAS
 --    Localiza usuários com mais de um crachá/tag simultaneamente ativos.
 -- =============================================================================
 SELECT
