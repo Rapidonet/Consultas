@@ -42,6 +42,7 @@ Consulte o [README do Oracle](Oracle/README.md) para detalhes específicos.
 | Sistema | Script | Tipo | Descrição |
 | :--- | :--- | :--- | :--- |
 | **Banco** | [CONSULTA_FRAGMENTACAO.sql](SqlServer/Banco/CONSULTA_FRAGMENTACAO.sql) | `SELECT` | Retorna percentual de fragmentação e páginas dos índices via DMV `sys.dm_db_index_physical_stats`. |
+| **Foracesso** | [CONSULTA_IDENTIFICACAO_FORACESSO.SQL](SqlServer/Foracesso/CONSULTA_IDENTIFICACAO_FORACESSO.SQL) | `SELECT` | Consultas de identificações/crachás ativos, filtros por padrão, auditorias e duplicidades. |
 | **Foracesso** | [CORRIGIR_SEQUENCIAL_FORACESSONET.sql](SqlServer/Foracesso/CORRIGIR_SEQUENCIAL_FORACESSONET.sql) | DML (`UPDATE`) | Sincroniza a tabela `SEQUENCIAL` com os IDs máximos de `MATRICULADO` (23) e `PESSOA` (37). |
 
 Consulte o [README do SQL Server](SqlServer/README.md) para detalhes específicos.

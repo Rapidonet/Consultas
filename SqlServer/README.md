@@ -17,6 +17,7 @@ Pasta de scripts, consultas e rotinas desenvolvidas especificamente para instân
 | Subpasta | Script | Tipo | Objetivo |
 | :--- | :--- | :--- | :--- |
 | `Banco/` | [CONSULTA_FRAGMENTACAO.sql](Banco/CONSULTA_FRAGMENTACAO.sql) | SELECT | Consulta percentual de fragmentação e páginas dos índices via DMV. |
+| `Foracesso/` | [CONSULTA_IDENTIFICACAO_FORACESSO.SQL](Foracesso/CONSULTA_IDENTIFICACAO_FORACESSO.SQL) | SELECT | Consultas de identificações/crachás ativos, filtros por padrão, auditorias e duplicidades. |
 | `Foracesso/` | [CORRIGIR_SEQUENCIAL_FORACESSONET.sql](Foracesso/CORRIGIR_SEQUENCIAL_FORACESSONET.sql) | DML | Correção e sincronização da tabela `SEQUENCIAL` (elementos 23 e 37). |
 
 ---
